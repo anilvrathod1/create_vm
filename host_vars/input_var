@@ -1,0 +1,50 @@
+---
+#This is important Inventory file to build the VM...Keep this file neat and clean
+#
+##vCenter Specific variables
+vcenter_hostname: "vcenter_hostname"
+datacenter: "datacenter_name"
+cluster: "cluster_name"
+template: "vm_template_name"
+folder: "Template"
+#
+#[vm_var] VM Specific Variables
+#
+vm_hostname: "anisble_testvm_onVB04"
+memory: "2"
+cpu: "2"
+vlan: "vlan_info"
+prod_ip: "10.10.10.10"
+gateway: "10.10.10.1"
+netmask: "255.255.255.0"
+backup_vlan: "backupVLAN"
+backup_ip: "10.10.10.100"
+backup_netmask: "255.255.255.0"
+backup_gateway: "10.10.10.1"
+#
+# Disk and File system related Variables
+#
+# ..depending upon the size, we need to select the Datastore, if 
+# ..No. of Disk is less and can be deplyed in single Datastore including OS and SWAP disk 
+# ..then use signle datastore option else you need to define multiple datastore
+# based on this we need to set the datastore variable...
+#
+datastore_vm_os_disk: "auto_prov_free__100"
+### Number of Additional Disk ...provide the count to below variable:
+no_of_disk: 5
+size_of_1st_disk: 100
+datastore_disk1: "auto_prov_free__100"
+size_of_2nd_disk: 20
+datastore_disk2: "auto_prov_free__100"
+size_of_3rd_disk: 30
+datastore_disk3: "auto_prov_free__100"
+size_of_4th_disk: 40
+datastore_disk4: "auto_prov_free__100"
+size_of_5th_disk: 50
+datastore_disk5: "auto_prov_free__100"
+#..for below part..still workiing to automate FS Creatation
+pv_name_1st_disk:
+mount_point_1st_disk:
+#lv_name_1st_disk: this can be used from mount point name
+#vg_name_1st_disk: this can be used from mount point name
+mount_option_1st_disk: 
