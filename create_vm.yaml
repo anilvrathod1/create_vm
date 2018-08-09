@@ -1,7 +1,7 @@
 #working version Name:  create_vm.yaml
 #Version:5
-#Status: working as expected
-#Auth: Anil Rathod
+#Status: working as expected, you need to use this on youe own risk :)
+#Auth: Anil Rathod (anilvrathod@gmail.com)
 #### 
 ---
   - hosts: localhost
@@ -26,7 +26,6 @@
       register: "{{ no_of_disk }}"
     - name: Setting Variable For disk when Number  of Disks is One
       set_fact:
-      # vars:
         vmdisk:
           - size_gb: 20
             type: thick
@@ -38,62 +37,61 @@
             type: thick
             datastore: "{{ datastore_disk1 }}"
       when: no_of_disk == 1
-      #debug: var=no_of_disk.stdout 
     - name: Setting Variable For disk when Number  of Disks is TWO
       set_fact:
        vmdisk:
          - size_gb: 20
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: 20 
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: "{{ size_of_1st_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk1 }}"
          - size_gb: "{{ size_of_2nd_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk2 }}"
       when: no_of_disk == 2
     - name: Setting Variable For disk when Number  of Disks is THREE..
       set_fact:
        vmdisk:
          - size_gb: 20
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: 20
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: "{{ size_of_1st_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk1 }}"
          - size_gb: "{{ size_of_2nd_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk2 }}"
          - size_gb: "{{ size_of_3rd_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk3 }}"
       when: no_of_disk == 3  
     - name: Setting Variable For disk when Number  of Disks is Four
       set_fact:
        vmdisk:
          - size_gb: 20
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: 20
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_vm_os_disk }}"
          - size_gb: "{{ size_of_1st_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk1 }}"
          - size_gb: "{{ size_of_2nd_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk2 }}"
          - size_gb: "{{ size_of_3rd_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk3 }}"
          - size_gb: "{{ size_of_4th_disk | int }}"
-           type: thick
+           type: eagerzeroedthick
            datastore: "{{ datastore_disk4 }}"
       when: no_of_disk == 4
     - name: Setting Variable For disk when Number  of Disks is Five
@@ -122,7 +120,7 @@
            datastore: "{{ datastore_disk5 }}"
       when: no_of_disk == 5
         
-    - name: Create VM  #"{{ vm_hostname }}"
+    - name: Create VM  "{{ vm_hostname }}"
       vmware_guest:
         name: "{{ vm_hostname }}"
         hostname: "{{ vcenter_hostname }}"
@@ -135,7 +133,7 @@
         state: poweredon
         folder: "{{ folder }}"
         hardware:
-          memory_gb: "{{ memory }}" # memory_mb: "{{ hostvars.memory }}"
+          memory_gb: "{{ memory }}" 
           num_cpus: "{{ cpu }}" 
           hotadd_cpu: yes
           hotremove_cpu: yes
